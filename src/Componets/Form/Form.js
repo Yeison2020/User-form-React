@@ -3,6 +3,8 @@ import "./form.css";
 const Form = () => {
   const fecth_url_API = "https://frontend-take-home.fetchrewards.com/form";
   const [userInfo, setUserInfo] = useState([]);
+
+  // Used useRef Hook to extract input Values
   const full_name_Ref = useRef(null);
   const email_Ref = useRef(null);
   const password_Ref = useRef(null);
@@ -20,8 +22,8 @@ const Form = () => {
   }, []);
   let occupationsArray = userInfo.occupations;
   let statesObject = userInfo.states;
-  const hello = statesObject?.map((data) => data.name);
-  console.log(hello);
+  const statesArray = statesObject?.map((data) => data.name);
+  console.log(statesArray);
 
   const handleRegistration = (e) => {
     const form = document.getElementById("form-reset");
@@ -76,7 +78,7 @@ const Form = () => {
     console.log(refs);
   };
 
-  // Adding occupations options
+  // Adding Tags options using a for Loop with occupation array
 
   let occupationsInput = document.getElementById("occupations");
   for (let i = 0; i < occupationsArray?.length; i++) {
@@ -86,17 +88,15 @@ const Form = () => {
     occupationsInput.insertBefore(option, occupationsInput.lastChild);
   }
 
-  // Adding states options
+  // Adding Tags options using a for Loop with states Array
 
   let stateInput = document.getElementById("states");
-  for (let i = 0; i < hello?.length; i++) {
+  for (let i = 0; i < statesArray?.length; i++) {
     let option = document.createElement("option");
-    let txt = document.createTextNode(hello[i]);
+    let txt = document.createTextNode(statesArray[i]);
     option.appendChild(txt);
     stateInput.insertBefore(option, stateInput.lastChild);
   }
-
-  // selected="selected"
 
   return (
     <div className="form-container">
